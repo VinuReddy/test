@@ -1,0 +1,123 @@
+// keyboard
+
+<div ng-if="!keyBoardConfig.showEmailKeyBoard" class="keyboard">
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div class="col-md-1 col-xs-1 key" data-ng-repeat="keyName in row1"> <a class="key-blue btn btn-default btn-lg" ng-click="onClick('normKey', keyName, $event)">{{keyName}}</a> </div>
+        </div>
+        <div class="col-md-1 col-xs-1 key key2 bspace">
+            <a class="key-blue btn btn-default btn-lg btn-bg-default fontSize font-style" ng-click="onClick('splKey', 'backspace', $event)"><!-- <img src="images/BackSpace.png"> -->Backspace</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div class="col-md-2 col-xs-2 key key3"> <a class="btn btn-default btn-lg key-grey" ng-class="keyBoardConfig.next" ng-click="onClick('splKey', 'next', $event)">Next <i class="fa fa-angle-double-right"></i></a></div>
+            <div class="col-md-1 col-xs-1 key" data-ng-repeat="keyName in row2"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('normKey', keyName, $event)">{{keyName}}</a> </div>
+            <div class="col-md-2 col-xs-2 key key3"> <a class="btn btn-default btn-lg key-grey" ng-class="keyBoardConfig.prev" ng-click="onClick('splKey', 'previous', $event)">Prev <i class="fa fa-angle-double-left"></i></a> </div>
+            <div class="col-md-1 col-xs-1 key" data-ng-repeat="keyName in row3"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('normKey', keyName, $event)">{{keyName}}</a> </div>
+        </div>
+        <div ng-if="!keyBoardConfig.updateButton" class="col-md-1 col-xs-1 key key2 key4 ent-style"> <a class="btn btn-default btn-lg key-grey btn-stretch padding-text" ng-click="onClick('splKey', 'enter', $event)" ng-class="{'key-green': enterEnabled}">Enter</a> </div>
+        <div ng-if="keyBoardConfig.updateButton" class="col-md-1 col-xs-1 key key2 key4"> <a class="btn btn-default btn-lg key-grey btn-stretch" ng-click="onClick('splKey', 'enter', $event)" ng-class="{'key-green': enterEnabled}">Update</a> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div class="col-md-2 col-xs-2 key key3"> <a class="btn btn-default btn-lg btn-bg-red key-red" ng-class="keyBoardConfig.cancel" ng-click="onClick('splKey', 'cancel', $event)">Cancel</a> </div>
+            <div class="col-md-1 col-xs-1 key" data-ng-repeat="keyName in row4"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('normKey', keyName, $event)">{{keyName}}</a> </div>
+        </div>
+        <div class="col-md-1 col-xs-1 key key2"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('splKey', 'clear', $event)">Clear</a> </div>
+    </div>
+    <div class="row space-bar">
+        <div class="col-md-12 col-xs-12">            
+            <div ng-if="keyBoardConfig.showAltKeyButton" class="col-md-2 col-xs-2 key"> <a class="key-blue btn btn-default btn-lg" ng-click="onClick('splKey', 'altKey', $event)">Alt</a></div>
+            <div class="col-md-3 col-xs-3 key keymax col-xs-offset-3" ng-class="spaceKeyClassSelector()">
+                <a class="key-blue btn btn-default btn-lg" ng-click="onClick('normKey', ' ', $event)">Space</a>
+            </div>
+            <div ng-if="keyBoardConfig.showAddrLookupButton" class="col-md-2 col-xs-2 key"> <a class="key-blue btn btn-default btn-lg" ng-click="onClick('splKey', 'addressLookup', $event)">Address Lookup</a></div>
+            <div ng-if="keyBoardConfig.customerEntry" class="col-md-2 col-xs-2 key"> <a class="key-blue btn btn-default btn-lg" ng-click="onClick('splKey', 'customerEntry', $event)">Customer Entry</a></div>
+            <div ng-if="showRefused" class="col-md-1 col-xs-1 key key2 pull-right">
+                <a class="btn btn-default btn-lg btn-bg-red key-red" ng-click="onClick('splKey', 'refused', $event)">Refused</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-if="keyBoardConfig.showEmailKeyBoard" class="keyboard">
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div class="col-md-1 col-xs-1 key" data-ng-repeat="keyName in row5"> <a class="key-blue btn btn-default btn-lg" ng-click="onClick('normKey', keyName, $event)">{{keyName}}</a> </div>
+        </div>
+        <div class="col-md-1 col-xs-1 key key2">
+            <a class="key-blue btn btn-default btn-lg btn-bg-default fontSize" ng-click="onClick('splKey', 'backspace', $event)"><!-- <img src="images/BackSpace.png"> -->Backspace</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div class="col-md-2 col-xs-2 key key3"> <a class="btn btn-default btn-lg key-grey" ng-class="keyBoardConfig.next" ng-click="onClick('splKey', 'next', $event)">Next <i class="fa fa-angle-double-right"></i></a></div>
+            <div data-ng-repeat="key in row6" class="key" ng-class="getClassName(key)"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('normKey', key.keyValue, $event)">{{key.keyValue}}</a> </div>
+            <div class="col-md-2 col-xs-2 key key3"> <a class="btn btn-default btn-lg key-grey" ng-class="keyBoardConfig.prev" ng-click="onClick('splKey', 'previous', $event)">Prev <i class="fa fa-angle-double-left"></i></a> </div>
+            <div data-ng-repeat="key in row7" class="key" ng-class="getClassName(key)"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('normKey', key.keyValue, $event)">{{key.keyValue}}</a> </div>
+        </div>
+        <div ng-if="!keyBoardConfig.updateButton" class="col-md-1 col-xs-1 key key2 key4 ent-style"> <a class="btn btn-default btn-lg key-grey btn-stretch" ng-click="onClick('splKey', 'enter', $event)" ng-class="{'key-green': enterEnabled}">Enter</a> </div>
+        <div ng-if="keyBoardConfig.updateButton" class="col-md-1 col-xs-1 key key2 key4"> <a class="btn btn-default btn-lg key-grey btn-stretch" ng-click="onClick('splKey', 'enter', $event)" ng-class="{'key-green': enterEnabled}">Update</a> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div class="col-md-2 col-xs-2 key key3"> <a class="btn btn-default btn-lg btn-bg-red key-red" ng-class="keyBoardConfig.cancel" ng-click="onClick('splKey', 'cancel', $event)">Cancel</a> </div>
+            <div data-ng-repeat="key in row8" class="key" ng-class="getClassName(key)"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('normKey', key.keyValue, $event)">{{key.keyValue}}</a> </div>
+        </div>
+        <div class="col-md-1 col-xs-1 key key2"> <a class="key-blue btn btn-default btn-lg btn-bg-default" ng-click="onClick('splKey', 'clear', $event)">Clear</a> </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11 col-xs-11">
+            <div ng-if="keyBoardConfig.showAltKeyButton" class="col-md-2 col-xs-2 key"> <a class="key-blue btn btn-default btn-lg" ng-click="onClick('splKey', 'altKey', $event)">ABC</a></div>
+            <div class="col-md-6 col-xs-6 col-md-offset-1 col-xs-offset-1 key keymax">
+                <a class="key-blue btn btn-default btn-lg" ng-click="onClick('normKey', ' ', $event)">Space</a>
+            </div>
+            <div class="key col-md-1 col-xs-1"> <a class="btn btn-default btn-lg key" ng-class="keyBoardConfig.next" ng-click="onClick('splKey', 'prevPosition', $event)"><i class="fa fa-angle-double-left"></i></a></div>
+            <div class="key col-md-1 col-xs-1 col-md-offset-1 col-xs-offset-1"> <a class="btn btn-default btn-lg key" ng-class="keyBoardConfig.next" ng-click="onClick('splKey', 'nextPosition', $event)"><i class="fa fa-angle-double-right"></i></a></div>
+        </div>
+    </div>
+</div>
+
+// dur-war
+
+<div class="dur-warnings">
+    <h3 class="text-align-center">DUR Warnings</h3>
+    <div class="dur-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-md-3 col-xs-3">Conflict Type</th>
+                    <th class="col-md-5 col-xs-5">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="fontBold" data-ng-repeat="warning in tempDurWarnings">
+                    <td class="col-md-3 col-xs-3"><p data-ng-bind="warning.conflictType" data-ellipsis></p></td>
+                    <td class="col-md-5 col-xs-5"><p data-ng-bind="warning.durDesc" data-ellipsis></p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+//prescriber
+
+<div class="presc-comm">
+    <div class="text-align-center">
+        <h3>{{prescriberComments.title}}</h3>
+    </div>
+    <p class="comments-font-size">{{prescriberComments.comments}}</p>
+    <div class="rph-info">
+        RPh:  <span>{{prescriberComments.rphName | rphName}}</span><span>{{prescriberComments.timestamp | dateFormat:'MM/dd/yyyy h:mm:ss a'}}</span>
+    </div>
+</div>
+
+
+// modal 
+
+<div class="modal-header">
+    <span class="bold">ExtraCare Phone # Lookup</span>
+</div>
+<single-Input-Page input-label="Enter Phone Number:" help-text="" enable-enter="11" perform-Click="lookup(inputvalue)" cancel-Action="cancelLookup()"
+    enable-space="false" max-input-length="10" enable-dot="false" enable-Cancel="true">
+</single-Input-Page>

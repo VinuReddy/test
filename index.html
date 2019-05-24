@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>WeCare Terminal</title>
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/font-awesome.css">
+    <link rel="stylesheet" href="public/css/cvs-style.css">
+</head>
+
+<body ng-app="weCarePlusApp" ondragstart="return false;" ondrop="return false;">
+    <script type="text/ng-template" id="processing.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Payment Terminal Processing</h3>
+        </div>
+        <div class="modal-body">
+            WAITING FOR CUSTOMER RESPONSE
+        </div>
+    </script>
+    <div class="full-height" ng-controller="TerminalCtrl">
+        <div class="header" ng-include src="'views/includes/header.html'"></div>
+        <!-- Application content comes here -->
+        <div class="content-wrapper" ng-view="" scope="row"></div>
+        <div class="footer" ng-include src="'views/includes/footer.html'"></div>
+    </div>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
+    <script src="scripts/lib/jquery.js"></script>
+    <script src="public/js/lib.js"></script>
+    <script src="public/js/cvs.js"></script>
+</body>
+
+</html>

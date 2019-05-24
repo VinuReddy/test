@@ -1,0 +1,99 @@
+// dur-man
+
+<div ng-controller="DURMandatoryCtrl" ng-init="init()">
+    <div class="container-fluid">
+        <instruction instr-text="descriptionText"></instruction>
+        <div class="dur-body-wrapper">
+            <patientdetails patient="patientDetails" show-dob="true" show-address="true" show-phone="true"/>
+            <div class="row">
+                <div class="dur-drug-description">
+                    <div class="col-md-6 col-xs-6">
+                        <div class="col-md-10 col-xs-10 dur-fnt">
+                            <p class="font-bold">{{defaultMessage.patientFillInfo.drugDesc}}</p>
+                        </div>
+                        <div class="col-md-2 col-xs-2">
+                            <div class="text-align-right dur-fnt">
+                                <p class="font-bold">{{defaultMessage.patientFillInfo.rxNum}}-{{defaultMessage.patientFillInfo.refillNum | prepandZero:2}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="padding-mandatory dur row dur-warnings-comments PFC-border">
+                <div class="col-md-6 col-xs-6 dur-font">
+                    <durwarnings ng-if="screenView.durWarnings" dur-warnings="durWarnings" ellipsis-length=47/>
+                </div>
+                <div ng-if="screenView.forcedCounselComments && screenView.prescriberComments" ng-class="screenView.gridValue" class="col-md-6 col-xs-6 dur-font">
+                    <prescriberComments ng-if="screenView.prescriberComments" prescriber-comments="prescriberComments" ng-class="screenView.commentsHeight" />
+                    <prescriberComments ng-if="screenView.forcedCounselComments" prescriber-comments="forcedCounselComments" ng-class="screenView.commentsHeight" />
+                </div>
+                <div ng-if="!screenView.forcedCounselComments && screenView.prescriberComments" ng-class="screenView.gridValue" class="col-md-6 col-xs-6 dur-font">
+                    <prescriberComments ng-if="screenView.prescriberComments" prescriber-comments="prescriberComments" ng-class="screenView.commentsHeight" />
+                    <prescriberComments ng-if="screenView.forcedCounselComments" prescriber-comments="forcedCounselComments" ng-class="screenView.commentsHeight" />
+                </div>
+                <div ng-if="screenView.forcedCounselComments && !screenView.prescriberComments" ng-class="screenView.gridValue" class="col-md-12 col-xs-12 dur-font">
+                    <prescriberComments ng-if="screenView.prescriberComments" prescriber-comments="prescriberComments" ng-class="screenView.commentsHeight" />
+                    <prescriberComments ng-if="screenView.forcedCounselComments" prescriber-comments="forcedCounselComments" ng-class="screenView.commentsHeight" />
+                </div>
+            </div>
+            <div class="row dur-font">
+                <div class="col-md-8 col-xs-8 dur-font">
+                    <dispositionbuttons ng-if="screenView.dispositionLineButtons" update-disposition="updateDisposition(disposition)" button-config="dispositionConfig" />
+                </div>
+                <div class="col-md-4 col-xs-4 dur-font">
+                    <navigationbuttons navigate="navigate(actionId)" navigation-info="navigationInfo" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-row-container">
+        <div class="dur-screen-button">
+            <button ng-if="voidTransactionButtonConfig" ng-click="voidTransaction()" class="btn btn-vCenter key-grey" ng-class="{active: voidActive}">
+              Cancel
+            </button>
+        </div>
+        <div class="dur-screen-button" style="float: right; margin-right: 30px">
+            <button ng-click="continue(continueButtonConfig.id)" class="btn btn-vCenter key-grey" ng-class="{active: continueActive}">
+                Continue
+            </button>
+        </div>
+    </div>
+</div>
+
+
+// dur-rph
+<div ng-controller="DURRphInitialsCtrl" class="rph-initials" ng-init="init()">
+    <div class="container-fluid">
+        <instruction instr-text="descriptionText"></instruction>
+        <div class="rph-font dur-table scroll-vertical dur-rphInitials-wrapper">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-md-4 col-xs-4">Patient Name</th>
+                        <th class="col-md-4 col-xs-4">Rx Number</th>
+                        <th class="col-md-4 col-xs-4">Drug</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="dur-init-fn-sz" data-ng-repeat="patientMessageItem in rPHInitialMessageList">
+                        <td class="col-md-4 col-xs-4">{{basketData[patientMessageItem.rxPatientId].patientDetails.lastName}}, {{basketData[patientMessageItem.rxPatientId].patientDetails.firstName}}</td>
+                        <td class="col-md-4 col-xs-4">{{patientMessageItem.patientFillInfo.rxNum}}-{{patientMessageItem.patientFillInfo.refillNum | prepandZero:2}}</td>
+                        <td class="col-md-4 col-xs-4">{{patientMessageItem.patientFillInfo.drugDesc}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row dur-rphinitials-scan-instr col-md-12 col-xs-12 mar-top fn-sz margin-scan">
+        <div class="col-md-10 col-xs-10 rph-scan-cred left-align">
+            <p>Scan/Enter RxConnect credential of the pharmacist who provided counseling</p>
+        </div>
+        <div class="col-md-2 col-xs-2">
+            <div class="input-fake margin-input" data-ng-bind="rPHInitials"></div>
+        </div>
+    </div>
+    <div class="bottom-row-container">
+        <keyboard on-click="onScreenKeyClick(keyType, keyValue)" enable-enter="enterKeyActive" custom-config="customKeyboardStyle"></keyboard>
+    </div>
+</div>
+
